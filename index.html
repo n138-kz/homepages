@@ -56,12 +56,8 @@
             ("00" + (timeCurrent.getSeconds())  ).substr(-2),
           ];
 
-          $('#local_date').text(
-            '' + timeCurrent[0] + '/' + timeCurrent[1] + '/' + timeCurrent[2]
-          );
-          $('#local_time').text(
-            '' + timeCurrent[3] + ':' + timeCurrent[4] + ':' + timeCurrent[5]
-          );
+          $('#local_date').text( '' + timeCurrent[0] + '/' + timeCurrent[1] + '/' + timeCurrent[2] );
+          $('#local_time').text( '' + timeCurrent[3] + ':' + timeCurrent[4] + ':' + timeCurrent[5] );
         }, 100);
       });
     </script>
