@@ -128,17 +128,6 @@
         background-color: salmon;
       }
     </style>
-    <script type="text/javascript">
-      function toggle_grecaptchaBadge () {
-        console.log('toggle_grecaptchaBadge');
-        console.log(parseInt($('.grecaptcha-badge').css('opacity'), 10));
-        if (parseInt($('.grecaptcha-badge').css('opacity'), 10) == 0) {
-          $('.grecaptcha-badge').css('opacity', 1);
-        } else {
-          $('.grecaptcha-badge').css('opacity', 0);
-        }
-      }
-    </script>
   </head>
   <body>
     <div id="obj01"></div>
@@ -162,10 +151,5 @@
       </table>
     </div>
     <div id="obj03"></div>
-    <div id="obj09">
-      <label>
-        <input type="checkbox" name="grecaptchaBadge" value="1" onchange="toggle_grecaptchaBadge()" />grecaptcha-badge
-      </label>
-    </div>
   </body>
 </html>
