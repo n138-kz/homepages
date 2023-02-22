@@ -19,13 +19,6 @@
       function onSignIn(googleUser) {
         console.log(googleUser);
         console.log(googleUser.credential);
-        
-
-        var profile = googleUser.getBasicProfile();
-        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-        console.log('Name: ' + profile.getName());
-        console.log('Image URL: ' + profile.getImageUrl());
-        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
       }
     </script>
     <style media="screen">
@@ -91,6 +84,7 @@
             $('#address_client').text(data[1]['REMOTE_ADDR']);
             $('#address_c_name').text(data[1]['REMOTE_NAME']);
             $('#address_server').text(data[1]['SERVER_NAME']);
+            $('#address_s_addr').text(data[1]['SERVER_ADDR']);
 
             rtt_delay = xhr_timer[1] - xhr_timer[0];
             $('#rtt_delay').removeClass();
@@ -158,8 +152,11 @@
           <td id="address_c_name"></td>
         </tr>
         <tr>
-          <th>Server address</th>
+          <th rowspan="2">Server address</th>
           <td id="address_server"></td>
+        </tr>
+        <tr>
+          <td id="address_s_addr"></td>
         </tr>
         <tr>
           <th>RTT(criterion)</th>
