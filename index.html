@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
     <script>
       grecaptcha.ready(function() { grecaptcha.execute('6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA', {action: 'homepage'}); });
     </script>
@@ -13,6 +14,15 @@
         opacity: 0;
       }
     </style>
+    <script>
+      function onSignIn(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+      }
+    </script>
     <style media="screen">
       body>div{
         margin: 0 auto;
@@ -152,6 +162,13 @@
         </tr>
       </table>
     </div>
-    <div id="obj03"></div>
+    <div id="obj03">
+      <div id="g_id_onload"
+        data-client_id="784669840257-i0a06p3o6g8k0k1tk26jj09li1q2acud.apps.googleusercontent.com"
+        data-login_uri="http://labs.n138.jp"
+        data-callback="onSignIn">
+      </div>
+      <div class="g_id_signin" data-type="standard" data-logo_alignment="left"></div>
+    </div>
   </body>
 </html>
