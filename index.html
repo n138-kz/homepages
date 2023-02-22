@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ja" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
+    <script type="text/javascript">
+      grecaptcha.ready(function() { grecaptcha.execute('6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA', {action: 'homepage'}); });
+    </script>
+    <style media="screen">
+      .grecaptcha-badge{
+        opacity: 0;
+      }
+    </style>
+    <style media="screen">
+      body>div{
+        margin: 0 auto;
+        width: 500px;
+      }
+    </style>
+    <style media="screen">
+      table
+      {
+        margin: 0 auto;
+      }
+      table, th, td
+      {
+        border: 1px solid #000;
+      }
+      th, td
+      {
+        padding: 0 10px;
+        font-weight: normal;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function(){
+        setInterval(function(){
+          $('#obj01').empty();
+          $('#obj01').append('<div />');
+          $('#obj01 div:last-child').attr('id', 'local_date');
+          $('#obj01').append('<div />');
+          $('#obj01 div:last-child').attr('id', 'local_time');
+          $('#local_date').text('yyyy/mm/dd');
+          $('#local_time').text('hh:mm:ss');
+
+          timeCurrent = new Date();
+          timeCurrent = [
+            ("00" + (timeCurrent.getFullYear()) ).substr(-4),
+            ("00" + (timeCurrent.getMonth()+1)  ).substr(-2),
+            ("00" + (timeCurrent.getDate())     ).substr(-2),
+            ("00" + (timeCurrent.getHours())    ).substr(-2),
+            ("00" + (timeCurrent.getMinutes())  ).substr(-2),
+            ("00" + (timeCurrent.getSeconds())  ).substr(-2),
+          ];
+
+          $('#local_date').text(
+            '' + timeCurrent[0] + '/' + timeCurrent[1] + '/' + timeCurrent[2]
+          );
+          $('#local_time').text(
+            '' + timeCurrent[3] + ':' + timeCurrent[4] + ':' + timeCurrent[5]
+          );
+        }, 100);
+      });
+    </script>
+    <style media="screen">
+      #local_date
+      {
+      }
+      #local_time
+      {
+        text-align: center;
+      }
+    </style>
+    <script type="text/javascript">
+      $(function(){
+        $('#address_client').text('unknown');
+        $('#address_c_name').text('unknown');
+        $('#address_server').text(location.host);
+        $('#rtt_delay').text('9999 ms').removeClass();
+
+        xhr_timer = [0, 0];
+        setInterval(function(){
+          xhr_timer[0] = new Date();
+          xhr_timer[1] = xhr_timer[0];
+          $.ajax({
+            url: './getinfo.php',
+            timeout: 3000,
+            cache: false,
+            type: 'GET'
+          })
+          .done(function(data){
+            xhr_timer[1] = new Date();
+            $('#address_client').text(data[1]['REMOTE_ADDR']);
+            $('#address_c_name').text(data[1]['REMOTE_NAME']);
+            $('#address_server').text(data[1]['SERVER_NAME']);
+
+            rtt_delay = xhr_timer[1] - xhr_timer[0];
+            $('#rtt_delay').removeClass();
+            if ( rtt_delay < 50 ) {
+              $('#rtt_delay').addClass('networkDelay_fast');
+            } else if ( rtt_delay < 150 ) {
+              $('#rtt_delay').addClass('networkDelay_normal');
+            } else {
+              $('#rtt_delay').addClass('networkDelay_slow');
+            }
+            $('#rtt_delay').text(rtt_delay + ' ms');
+          })
+          .fail(function(data){
+            xhr_timer[1] = xhr_timer[0];
+          })
+          .always(function(data){
+            console.debug(data);
+          })
+        }, 1000);
+      });
+    </script>
+    <style media="screen">
+      #address_c_name
+      {
+        font-size: xx-small;
+      }
+      .networkDelay_fast
+      {
+        background-color: springgreen;
+      }
+      .networkDelay_normal
+      {
+        background-color: khaki;
+      }
+      .networkDelay_slow
+      {
+        background-color: salmon;
+      }
+    </style>
+    <script type="text/javascript">
+      function toggle_grecaptchaBadge () {
+        console.log('toggle_grecaptchaBadge');
+        console.log(parseInt($('.grecaptcha-badge').css('opacity'), 10));
+        if (parseInt($('.grecaptcha-badge').css('opacity'), 10) == 0) {
+          $('.grecaptcha-badge').css('opacity', 1);
+        } else {
+          $('.grecaptcha-badge').css('opacity', 0);
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <div id="obj01"></div>
+    <div id="obj02">
+      <table>
+        <tr>
+          <th rowspan="2">Your IP address</th>
+          <td id="address_client"></td>
+        </tr>
+        <tr>
+          <td id="address_c_name"></td>
+        </tr>
+        <tr>
+          <th>Server address</th>
+          <td id="address_server"></td>
+        </tr>
+        <tr>
+          <th>RTT(criterion)</th>
+          <td id="rtt_delay"></td>
+        </tr>
+      </table>
+    </div>
+    <div id="obj03"></div>
+    <div id="obj09">
+      <label>
+        <input type="checkbox" name="grecaptchaBadge" value="1" onchange="toggle_grecaptchaBadge()" />grecaptcha-badge
+      </label>
+    </div>
+  </body>
+</html>
