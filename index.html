@@ -1,218 +1,218 @@
 <!DOCTYPE html>
 <html lang="ja" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-    <script src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
-    <script src="https://accounts.google.com/gsi/client" async defer></script>
-    <script>
-      grecaptcha.ready(function() { grecaptcha.execute('6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA', {action: 'homepage'}); });
-    </script>
-    <style media="screen">
-      .grecaptcha-badge{
-        opacity: 0;
-      }
-    </style>
-    <script>
-      /* obj03 */
-      function onSignIn(googleUser) {
-        console.log(googleUser);
-        console.log(googleUser.credential);
-        location.href="/";
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1">
+		<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+		<script src="https://www.google.com/recaptcha/api.js?render=6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA"></script>
+		<script src="https://accounts.google.com/gsi/client" async defer></script>
+		<script>
+			grecaptcha.ready(function() { grecaptcha.execute('6LfCHdcUAAAAAOwkHsW_7W7MfoOrvoIw9CXdLRBA', {action: 'homepage'}); });
+		</script>
+		<style media="screen">
+			.grecaptcha-badge{
+				opacity: 0;
+			}
+		</style>
+		<script>
+			/* obj03 */
+			function onSignIn(googleUser) {
+				console.log(googleUser);
+				console.log(googleUser.credential);
+				location.href="/";
 
-        let xhr = new XMLHttpRequest();
-        xhr.onreadystatechange = function() {
-          console.debug(xhr.readyState)
-          /*
-          xhr.readyState = 
-              0: 準備段階  まだ通信は行われていない状態
-              1: 準備完了  通信を行う準備が完了している状態
-              2: 通信開始  サーバーと通信が始まっている状態
-              3: 受信中    サーバーから目的のデータを取得している状態
-              4: 通信完了  データを取得して通信が終了している状態
-          xhr.status = 
-            200: 成功      特に問題なく通信が成功した状態
-            401: エラー    認証が必要なため通信できない状態
-            403: エラー    アクセスが禁止されていて通信できない状態
-            404: エラー    情報が存在しないために通信できない状態
-            500: エラー    サーバー側の不具合で通信できない状態
-            503: エラー    サーバーに負荷がかかって通信できない状態
-          */
-          if ( xhr.readyState === 4 && xhr.status === 200 ) {
-            console.log( xhr.responseText );
-          } else {
-            console.log( [xhr.responseText,xhr.readyState,xhr.status] );
-          }
-        }
-        xhr.open('POST','./gsi-server.php');
-        xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-        xhr.send( 'ts='+(Math.floor((new Date()).getTime()/1000)) );
+				let xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+					console.debug(xhr.readyState)
+					/*
+					xhr.readyState = 
+							0: 準備段階	まだ通信は行われていない状態
+							1: 準備完了	通信を行う準備が完了している状態
+							2: 通信開始	サーバーと通信が始まっている状態
+							3: 受信中	サーバーから目的のデータを取得している状態
+							4: 通信完了	データを取得して通信が終了している状態
+					xhr.status = 
+						200: 成功	特に問題なく通信が成功した状態
+						401: エラー	認証が必要なため通信できない状態
+						403: エラー	アクセスが禁止されていて通信できない状態
+						404: エラー	情報が存在しないために通信できない状態
+						500: エラー	サーバー側の不具合で通信できない状態
+						503: エラー	サーバーに負荷がかかって通信できない状態
+					*/
+					if ( xhr.readyState === 4 && xhr.status === 200 ) {
+						console.log( xhr.responseText );
+					} else {
+						console.log( [xhr.responseText,xhr.readyState,xhr.status] );
+					}
+				}
+				xhr.open('POST','./gsi-server.php');
+				xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+				xhr.send( 'ts='+(Math.floor((new Date()).getTime()/1000)) );
 
-      }
-    </script>
-    <style media="screen">
-      body>div{
-        margin: 0 auto;
-        width: 500px;
-      }
-    </style>
-    <script type="text/javascript">
-      /* obj01 */
-      $(function(){
-        setInterval(function(){
-          $('#obj01').empty();
-          $('#obj01').append('<div />');
-          $('#obj01 div:last-child').attr('id', 'local_date');
-          $('#obj01').append('<div />');
-          $('#obj01 div:last-child').attr('id', 'local_time');
-          $('#local_date').text('yyyy/mm/dd');
-          $('#local_time').text('hh:mm:ss');
+			}
+		</script>
+		<style media="screen">
+			body>div{
+				margin: 0 auto;
+				width: 500px;
+			}
+		</style>
+		<script type="text/javascript">
+			/* obj01 */
+			$(function(){
+				setInterval(function(){
+					$('#obj01').empty();
+					$('#obj01').append('<div />');
+					$('#obj01 div:last-child').attr('id', 'local_date');
+					$('#obj01').append('<div />');
+					$('#obj01 div:last-child').attr('id', 'local_time');
+					$('#local_date').text('yyyy/mm/dd');
+					$('#local_time').text('hh:mm:ss');
 
-          timeCurrent = new Date();
-          timeCurrent = [
-            ("00" + (timeCurrent.getFullYear()) ).substr(-4),
-            ("00" + (timeCurrent.getMonth()+1)  ).substr(-2),
-            ("00" + (timeCurrent.getDate())     ).substr(-2),
-            ("00" + (timeCurrent.getHours())    ).substr(-2),
-            ("00" + (timeCurrent.getMinutes())  ).substr(-2),
-            ("00" + (timeCurrent.getSeconds())  ).substr(-2),
-          ];
+					timeCurrent = new Date();
+					timeCurrent = [
+						("00" + (timeCurrent.getFullYear()) ).substr(-4),
+						("00" + (timeCurrent.getMonth()+1)  ).substr(-2),
+						("00" + (timeCurrent.getDate())     ).substr(-2),
+						("00" + (timeCurrent.getHours())    ).substr(-2),
+						("00" + (timeCurrent.getMinutes())  ).substr(-2),
+						("00" + (timeCurrent.getSeconds())  ).substr(-2),
+					];
 
-          $('#local_date').text( '' + timeCurrent[0] + '/' + timeCurrent[1] + '/' + timeCurrent[2] );
-          $('#local_time').text( '' + timeCurrent[3] + ':' + timeCurrent[4] + ':' + timeCurrent[5] );
-        }, 100);
-      });
-    </script>
-    <style media="screen">
-      /* obj01 */
-      #local_time
-      {
-        text-align: center;
-      }
-    </style>
-    <script type="text/javascript">
-      /* obj02 */
-      $(function(){
-        $('#address_client').text('unknown');
-        $('#address_c_name').text('unknown');
-        $('#address_server').text(location.host);
-        $('#rtt_delay').text('9999 ms').removeClass();
+					$('#local_date').text( '' + timeCurrent[0] + '/' + timeCurrent[1] + '/' + timeCurrent[2] );
+					$('#local_time').text( '' + timeCurrent[3] + ':' + timeCurrent[4] + ':' + timeCurrent[5] );
+				}, 100);
+			});
+		</script>
+		<style media="screen">
+			/* obj01 */
+			#local_time
+			{
+				text-align: center;
+			}
+		</style>
+		<script type="text/javascript">
+			/* obj02 */
+			$(function(){
+				$('#address_client').text('unknown');
+				$('#address_c_name').text('unknown');
+				$('#address_server').text(location.host);
+				$('#rtt_delay').text('9999 ms').removeClass();
 
-        xhr_timer = [0, 0];
-        setInterval(function(){
-          xhr_timer[0] = new Date();
-          xhr_timer[1] = xhr_timer[0];
-          $.ajax({
-            url: './getinfo.php',
-            timeout: 3000,
-            cache: false,
-            type: 'GET'
-          })
-          .done(function(data){
-            xhr_timer[1] = new Date();
-            $('#address_client').text(data[1]['REMOTE_ADDR']);
-            $('#address_c_name').text(data[1]['REMOTE_NAME']);
-            $('#address_server').text(data[1]['SERVER_NAME']);
-            $('#address_s_addr').text(data[1]['SERVER_ADDR']);
+				xhr_timer = [0, 0];
+				setInterval(function(){
+					xhr_timer[0] = new Date();
+					xhr_timer[1] = xhr_timer[0];
+					$.ajax({
+						url: './getinfo.php',
+						timeout: 3000,
+						cache: false,
+						type: 'GET'
+					})
+					.done(function(data){
+						xhr_timer[1] = new Date();
+						$('#address_client').text(data[1]['REMOTE_ADDR']);
+						$('#address_c_name').text(data[1]['REMOTE_NAME']);
+						$('#address_server').text(data[1]['SERVER_NAME']);
+						$('#address_s_addr').text(data[1]['SERVER_ADDR']);
 
-            rtt_delay = xhr_timer[1] - xhr_timer[0];
-            $('#rtt_delay').removeClass();
-            if ( rtt_delay < 50 ) {
-              $('#rtt_delay').addClass('networkDelay_fast');
-            } else if ( rtt_delay < 150 ) {
-              $('#rtt_delay').addClass('networkDelay_normal');
-            } else {
-              $('#rtt_delay').addClass('networkDelay_slow');
-            }
-            $('#rtt_delay').text(rtt_delay + ' ms');
-          })
-          .fail(function(data){
-            xhr_timer[1] = xhr_timer[0];
-          })
-          .always(function(data){
-            console.debug(data);
-          })
-        }, 1000);
-      });
-    </script>
-    <style media="screen">
-      /* obj02 */
-      #obj02 table
-      {
-        margin: 0 auto;
-      }
-      #obj02 table, th, td
-      {
-        border: 1px solid #000;
-      }
-      #obj02 th, td
-      {
-        padding: 0 10px;
-        font-weight: normal;
-      }
-      /* ----- */
-      #address_c_name, #address_s_addr
-      {
-        font-size: xx-small;
-      }
-      .networkDelay_fast
-      {
-        background-color: springgreen;
-      }
-      .networkDelay_normal
-      {
-        background-color: khaki;
-      }
-      .networkDelay_slow
-      {
-        background-color: salmon;
-      }
-    </style>
-  </head>
-  <body>
-    <div id="obj01"></div>
-    <div id="obj02">
-      <table>
-        <tr>
-          <th rowspan="2">Your IP address</th>
-          <td id="address_client"></td>
-        </tr>
-        <tr>
-          <td id="address_c_name"></td>
-        </tr>
-        <tr>
-          <th rowspan="2">Server address</th>
-          <td id="address_server"></td>
-        </tr>
-        <tr>
-          <td id="address_s_addr"></td>
-        </tr>
-        <tr>
-          <th>RTT(criterion)</th>
-          <td id="rtt_delay"></td>
-        </tr>
-      </table>
-    </div>
-    <div id="obj03">
-      <div id="g_id_onload"
-        data-client_id="784669840257-i0a06p3o6g8k0k1tk26jj09li1q2acud.apps.googleusercontent.com"
-        data-login_uri="https://labs.n138.jp"
-        data-callback="onSignIn">
-      </div>
-      <!--
-        <div class="g_id_signin" data-type="standard" data-logo_alignment="left"></div>
-      -->
-    </div>
+						rtt_delay = xhr_timer[1] - xhr_timer[0];
+						$('#rtt_delay').removeClass();
+						if ( rtt_delay < 50 ) {
+							$('#rtt_delay').addClass('networkDelay_fast');
+						} else if ( rtt_delay < 150 ) {
+							$('#rtt_delay').addClass('networkDelay_normal');
+						} else {
+							$('#rtt_delay').addClass('networkDelay_slow');
+						}
+						$('#rtt_delay').text(rtt_delay + ' ms');
+					})
+					.fail(function(data){
+						xhr_timer[1] = xhr_timer[0];
+					})
+					.always(function(data){
+						console.debug(data);
+					})
+				}, 1000);
+			});
+		</script>
+		<style media="screen">
+			/* obj02 */
+			#obj02 table
+			{
+				margin: 0 auto;
+			}
+			#obj02 table, th, td
+			{
+				border: 1px solid #000;
+			}
+			#obj02 th, td
+			{
+				padding: 0 10px;
+				font-weight: normal;
+			}
+			/* ----- */
+			#address_c_name, #address_s_addr
+			{
+				font-size: xx-small;
+			}
+			.networkDelay_fast
+			{
+				background-color: springgreen;
+			}
+			.networkDelay_normal
+			{
+				background-color: khaki;
+			}
+			.networkDelay_slow
+			{
+				background-color: salmon;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="obj01"></div>
+		<div id="obj02">
+			<table>
+				<tr>
+					<th rowspan="2">Your IP address</th>
+					<td id="address_client"></td>
+				</tr>
+				<tr>
+					<td id="address_c_name"></td>
+				</tr>
+				<tr>
+					<th rowspan="2">Server address</th>
+					<td id="address_server"></td>
+				</tr>
+				<tr>
+					<td id="address_s_addr"></td>
+				</tr>
+				<tr>
+					<th>RTT(criterion)</th>
+					<td id="rtt_delay"></td>
+				</tr>
+			</table>
+		</div>
+		<div id="obj03">
+			<div id="g_id_onload"
+				data-client_id="784669840257-i0a06p3o6g8k0k1tk26jj09li1q2acud.apps.googleusercontent.com"
+				data-login_uri="https://labs.n138.jp"
+				data-callback="onSignIn">
+			</div>
+			<!--
+				<div class="g_id_signin" data-type="standard" data-logo_alignment="left"></div>
+			-->
+		</div>
 <div id="obj04">
 <ul>
-  <li><a href="./conoha_api_access/">ConoHa VM(tyo1)</a></li>
-  <li><a href="./Test-Web-Speech-API/">音声読み上げ</a></li>
-  <li><a href="./resizeImg/index.html">resizeImg</a></li>
-  <li><a href="./joinImg/index.html">joinImg</a></li>
-  <li><a href="./cutImg/index.html">cutImg</a></li>
-  <li><a href="./EarthQuakeHasAlert/sample/">EarthQuakeHasAlert/sample</a></li>
+	<li><a href="./conoha_api_access/">ConoHa VM(tyo1)</a></li>
+	<li><a href="./Test-Web-Speech-API/">音声読み上げ</a></li>
+	<li><a href="./resizeImg/index.html">resizeImg</a></li>
+	<li><a href="./joinImg/index.html">joinImg</a></li>
+	<li><a href="./cutImg/index.html">cutImg</a></li>
+	<li><a href="./EarthQuakeHasAlert/sample/">EarthQuakeHasAlert/sample</a></li>
 </ul>
 </div>
-  </body>
+	</body>
 </html>
