@@ -12,28 +12,6 @@
 		<style media="screen">
 			.grecaptcha-badge{ opacity: 0; }
 		</style>
-		<script>
-			/* obj03 */
-			function onSignIn(googleUser) {
-				console.log(googleUser);
-				console.log(googleUser.credential);
-
-				let xhr = new XMLHttpRequest();
-				xhr.onreadystatechange = function() {
-
-					console.debug(xhr.readyState)
-					if ( xhr.readyState === 4 && xhr.status === 200 ) {
-						console.log( xhr.responseText );
-					} else {
-						console.log( [xhr.responseText,xhr.readyState,xhr.status] );
-					}
-				}
-				xhr.open('POST','./gsi-server.php');
-				xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
-				xhr.send( 'ts='+(Math.floor((new Date()).getTime()/1000)) );
-
-			}
-		</script>
 		<style media="screen">
 			body>div{
 				margin: 0 auto;
@@ -152,6 +130,28 @@
 				background-color: salmon;
 			}
 		</style>
+		<script>
+			/* obj03 */
+			function onSignIn(googleUser) {
+				console.log(googleUser);
+				console.log(googleUser.credential);
+
+				let xhr = new XMLHttpRequest();
+				xhr.onreadystatechange = function() {
+
+					console.debug(xhr.readyState)
+					if ( xhr.readyState === 4 && xhr.status === 200 ) {
+						console.log( xhr.responseText );
+					} else {
+						console.log( [xhr.responseText,xhr.readyState,xhr.status] );
+					}
+				}
+				xhr.open('POST','./gsi-server.php');
+				xhr.setRequestHeader('content-type', 'application/x-www-form-urlencoded;charset=UTF-8');
+				xhr.send( 'ts='+(Math.floor((new Date()).getTime()/1000)) );
+
+			}
+		</script>
 	</head>
 	<body>
 		<div id="obj01"></div>
