@@ -29,5 +29,4 @@
 	curl_setopt($curl_req,CURLOPT_FOLLOWLOCATION, TRUE);/* Locationヘッダを追跡 */
 	//$curl_res=curl_exec($curl_req);
 
-	echo json_encode($response);
-	exit();
+	echo json_encode($response); exit();
