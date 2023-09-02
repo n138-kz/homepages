@@ -13,6 +13,8 @@
 	unset( $response[1]['SERVER_ADMIN'] );
 	unset( $response[1]['SERVER_SOFTWARE'] );
 
+	echo json_encode($response); exit();
+
 	$post_data = [
 		'username' => $response[1]['SERVER_NAME'],
 		'title'    => $_SERVER['SCRIPT_NAME'],
@@ -28,5 +30,3 @@
 	curl_setopt($curl_req,CURLOPT_COOKIEFILE, 'tmp');
 	curl_setopt($curl_req,CURLOPT_FOLLOWLOCATION, TRUE);/* Locationヘッダを追跡 */
 	//$curl_res=curl_exec($curl_req);
-
-	echo json_encode($response); exit();
