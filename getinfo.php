@@ -30,3 +30,4 @@
 	//$curl_res=curl_exec($curl_req);
 
 	echo json_encode($response);
+	exit();
