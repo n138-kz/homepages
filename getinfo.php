@@ -2,7 +2,7 @@
 	header('Content-Type: application/json');
 	$response = [time(), $_SERVER];
 	$response[1]['REMOTE_NAME'] = gethostbyaddr($response[1]['REMOTE_ADDR']);
-	if(! strlen($response[1]['REMOTE_NAME']) > 0 ){
+	if( ! strlen($response[1]['REMOTE_NAME']) > 0 ){
 		$response[1]['REMOTE_NAME'] = $response[1]['REMOTE_ADDR'];
 	}
 	unset( $response[1]['CONTEXT_DOCUMENT_ROOT'] );
